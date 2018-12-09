@@ -1,0 +1,61 @@
+{
+  "name": "rn80rc0",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "debug-clean": "cd android && gradlew clean && gradlew installDebug",
+    "debug": "cd android && gradlew installDebug",
+    "emulator": "start cmd /k \"C:\\Data\\Software\\Android\\emulator\\emulator.exe -avd Nexus_4_API_23\"",
+    "lint": "tslint 'src/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
+    "@types/react-navigation": "^2.13.7",
+    "@types/react-redux": "^6.0.10",
+    "dva-core": "^1.4.0",
+    "react": "16.6.3",
+    "react-native": "0.58.0-rc.1",
+    "react-native-gesture-handler": "^1.0.10",
+    "react-navigation": "^3.0.4",
+    "react-navigation-redux-helpers": "^2.0.8",
+    "react-redux": "^5.1.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.1.6",
+    "@types/jest": "^23.3.10",
+    "@types/react": "^16.7.11",
+    "@types/react-native": "^0.57.15",
+    "@types/react-test-renderer": "^16.0.3",
+    "babel-jest": "23.6.0",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.50.0",
+    "react-native-git-upgrade": "^0.2.7",
+    "react-native-typescript-transformer": "^1.2.10",
+    "react-test-renderer": "16.6.1",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-config-standard": "^8.0.1",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.1"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testPathIgnorePatterns": [
+      "\\.snap$",
+      "<rootDir>/node_modules/"
+    ],
+    "cacheDirectory": ".jest/cache"
+  }
+}
