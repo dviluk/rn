@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "clear-start": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "test": "jest",
     "debug-clean": "cd android && gradlew clean && gradlew installDebug",
+    "release": "cd android && gradlew clean && gradlew assembleRelease",
+    "install": "cd android && gradlew installRelease",
     "debug": "cd android && gradlew installDebug",
     "emulator": "start cmd /k \"C:\\Data\\Software\\Android\\emulator\\emulator.exe -avd Nexus_4_API_23\"",
     "lint": "tslint 'src/**/*.{ts,tsx}'"
