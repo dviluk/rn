@@ -1,5 +1,14 @@
-import { createAction, NavigationActions, Storage } from '../utils'
+import { createAction, NavigationActions } from '../utils'
+import * as Storage from '../utils/storage'
 import * as authService from '../services/auth'
+import { UserLogin } from '../@types';
+
+export interface AppModel {
+  login: boolean,
+  loading: boolean,
+  fetching: boolean,
+  user: UserLogin | null
+}
 
 export default {
   namespace: 'app',
@@ -7,6 +16,7 @@ export default {
     login: false,
     loading: true,
     fetching: false,
+    user: null
   },
   reducers: {
     updateState(state: any, { payload }: any) {
@@ -15,21 +25,30 @@ export default {
   },
   effects: {
     *loadStorage(action: any, { call, put }: any) {
-      const login = yield call(Storage.get, 'login', false)
-      yield put(createAction('updateState')({ login, loading: false }))
+      const user: UserLogin = yield call(Storage.get, 'user', null)
+      yield put(createAction('updateState')({ user, loading: false }))
     },
-    *login({ payload }: any, { call, put }: any) {
+    *login({ payload, callback }: any, { call, put }: any) {
+      // decirle al sistema que comenzara una petición
       yield put(createAction('updateState')({ fetching: true }))
-      const login = yield call(authService.login, payload)
-      if (login) {
-        yield put(NavigationActions.back())
+      // petición
+      const user = yield call(authService.login, payload)
+      // cuando termine la petición se le avisara de nuevo al sistema
+      yield put(createAction('updateState')({ user, fetching: false }))
+
+      Storage.set('user', user)
+
+      if (callback) {
+        callback()
       }
-      yield put(createAction('updateState')({ login, fetching: false }))
-      Storage.set('login', login)
     },
-    *logout(action: any, { call, put }: any) {
-      yield call(Storage.set, 'login', false)
-      yield put(createAction('updateState')({ login: false }))
+    *logout({ callback }: any, { call, put }: any) {
+      yield call(Storage.set, 'user', null)
+      yield put(createAction('updateState')({ user: null }))
+
+      if (callback) {
+        callback()
+      }
     },
   },
   subscriptions: {
@@ -38,3 +57,7 @@ export default {
     },
   },
 }
+
+
+// put: ejecutar acción
+// call: llamar servicio

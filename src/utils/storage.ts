@@ -1,24 +1,45 @@
 import { AsyncStorage } from 'react-native'
 
-function clear() {
+/**
+ * Eliminar todos los datos almacenados
+ */
+export function clear() {
   return AsyncStorage.clear()
 }
 
-function get(key: string, defaultValue = null) {
+/**
+ * Obtiene un registro del Storage
+ * @param key Key del registro
+ * @param defaultValue En caso de que no retorne valor, retorna este valor
+ */
+export function get(key: string, defaultValue = null) {
   return AsyncStorage.getItem(key).then(
     value => (value !== null ? JSON.parse(value) : defaultValue)
   )
 }
 
-function set(key: string, value: any) {
+/**
+ * Guarda un registro en el Storage
+ * @param key Key del nuevo registro
+ * @param value Valor que se almacenara
+ */
+export function set(key: string, value: any) {
   return AsyncStorage.setItem(key, JSON.stringify(value))
 }
 
-function remove(key: string) {
+/**
+ * Elimina un registro en especifico
+ * @param key Key del registro a eliminar
+ */
+export function remove(key: string) {
   return AsyncStorage.removeItem(key)
 }
 
-function multiGet(...keys: string[]) {
+/**
+ * Consulta multiples registros
+ * @param keys Keys de los registros a consultar
+ */
+export function multiGet(...keys: string[]) {
   return AsyncStorage.multiGet([...keys]).then(stores => {
     const data: any = {}
     stores.forEach((result, i, store) => {
@@ -27,8 +48,11 @@ function multiGet(...keys: string[]) {
     return data
   })
 }
-
-function multiRemove(...keys: string[]) {
+/**
+ * Elimina multiples registros ala vez
+ * @param keys Keys de los registros a eliminar
+ */
+export function multiRemove(...keys: string[]) {
   return AsyncStorage.multiRemove([...keys])
 }
 

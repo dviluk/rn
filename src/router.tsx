@@ -8,7 +8,8 @@ import {
   NavigationActions,
   NavigationStackScreenOptions,
   NavigationState,
-  NavigationScreenProps
+  NavigationScreenProps,
+  createSwitchNavigator
 } from 'react-navigation'
 
 // redux stuff
@@ -23,7 +24,7 @@ import { connect } from 'react-redux'
 
 // screens
 import {
-  HelloWorldScreen, HelloWorld2Screen
+  HelloWorldScreen, HelloWorld2Screen, LoginScreen
 } from './screens'
 
 // modals
@@ -104,15 +105,25 @@ const RootNavigation = createStackNavigator(
   }
 )
 
+const AuthNavigation = createSwitchNavigator(
+  {
+    Auth: LoginScreen,
+    App: RootNavigation
+  },
+  {
+    initialRouteName: 'Auth'
+  }
+)
+
 /**
  * Reducer para manejar la navegacion
  */
-export const routerReducer = createNavigationReducer(RootNavigation)
+export const routerReducer = createNavigationReducer(AuthNavigation)
 export const routerMiddleware = createReactNavigationReduxMiddleware<{ router: any }>(
   'root',
   state => state.router
 )
-const App = reduxifyNavigator(RootNavigation, 'root')
+const App = reduxifyNavigator(AuthNavigation, 'root')
 
 interface Props {
   app?: any
@@ -162,6 +173,9 @@ class Router extends React.PureComponent<Props> {
     const currentScreen = getActiveRouteName(this.props.router)
     if (currentScreen === 'Modal') {
       return true
+    }
+    if (currentScreen === 'Auth') {
+      return false
     }
     if (currentScreen !== 'Home') {
       this.props.dispatch(NavigationActions.back())
