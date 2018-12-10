@@ -2,15 +2,15 @@ declare module "tcomb-form-native" {
   import * as __React from 'react'
   import * as __RN from 'react-native'
 
-  export interface FormRef<T> extends __React.RefObject<T> {}
-  
+  export interface FormRef<T> extends __React.RefObject<T> { }
+
   namespace TcombForm {
     const String: any
     const Boolean: any
     const Number: any
     const Date: any
     namespace form {
-      class Form extends __React.Component<{ type: any, options?: any }>{ 
+      class Form extends __React.Component<{ type: any, options?: any, value?: any, onChange?: (form: any) => void }>{
         getComponent(input: string): any
         getValue(): any
         validate(): any
