@@ -11,9 +11,9 @@ declare module "tcomb-form-native" {
     const Date: any
     namespace form {
       class Form extends __React.Component<{ type: any, options?: any, value?: any, onChange?: (form: any) => void }>{
-        getComponent(input: string): any
-        getValue(): any
-        validate(): any
+        public getComponent(input: string): any
+        public getValue(): any
+        public validate(): any
       }
     }
     function struct(fields: { [key: string]: any }): any
