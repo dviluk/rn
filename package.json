@@ -17,6 +17,7 @@
   "dependencies": {
     "@types/react-navigation": "^2.13.7",
     "@types/react-redux": "^6.0.10",
+    "antd-mobile-rn": "^2.3.2",
     "dva-core": "^1.4.0",
     "react": "16.6.3",
     "react-native": "0.58.0-rc.1",
@@ -33,6 +34,7 @@
     "@types/react-native": "^0.57.15",
     "@types/react-test-renderer": "^16.0.3",
     "babel-jest": "23.6.0",
+    "babel-plugin-import": "^1.11.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.50.0",
     "react-native-git-upgrade": "^0.2.7",

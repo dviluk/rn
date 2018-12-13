@@ -9,5 +9,11 @@
         "legacy": true
       }
     ],
+    [
+      "import",
+      {
+        "libraryName": "antd-mobile-rn"
+      }
+    ]
   ]
 }
