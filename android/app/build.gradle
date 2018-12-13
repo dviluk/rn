@@ -104,7 +104,13 @@ android {
         versionCode 1
         versionName "1.0"
         ndk {
-          abiFilters "armeabi-v7a", "x86"
+          abiFilters "armeabi-v7a", "x86", 'armeabi', 'arm64-v8a'
+        }
+
+        packagingOptions {
+          exclude '/lib/mips64/**'
+          exclude '/lib/arm64-v8a/**'
+          exclude '/lib/x86_64/**'
         }
     }
     signingConfigs {

@@ -11,7 +11,8 @@
     "install": "cd android && gradlew installRelease",
     "debug": "cd android && gradlew installDebug",
     "emulator": "start cmd /k \"C:\\Data\\Software\\Android\\emulator\\emulator.exe -avd Nexus_4_API_23\"",
-    "lint": "tslint 'src/**/*.{ts,tsx}'"
+    "lint": "tslint 'src/**/*.{ts,tsx}'",
+    "reverse": "adb reverse tcp:8081 tcp:8081"
   },
   "dependencies": {
     "@types/react-navigation": "^2.13.7",
