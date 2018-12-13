@@ -5,7 +5,9 @@ declare module "tcomb-form-native" {
   export interface FormRef<T> extends __React.RefObject<T> { }
 
   namespace TcombForm {
-    const String: any
+    const String: {
+      getValidationErrorMessage: (value: any, path: any, context: any) => string
+    }
     const Boolean: any
     const Number: any
     const Date: any
