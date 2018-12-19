@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { StyleSheet, Text, View, ViewStyle, TextStyle, ImageStyle, } from 'react-native';
-import { Button, InputItem, Flex, WingBlank, Card } from 'antd-mobile-rn'
+import { Button, InputItem, Flex, WingBlank, Card } from '@ant-design/react-native'
 import { NavigationDescriptor } from 'react-navigation';
 import t, { FormRef, FormType } from 'tcomb-form-native'
 import { connect } from 'react-redux';

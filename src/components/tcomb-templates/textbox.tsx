@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TextInput } from "react-native";
-import { InputItem, WingBlank } from "antd-mobile-rn"
+import { InputItem, WingBlank } from "@ant-design/react-native"
 
 export const textbox = (locals: any) => {
   if (locals.hidden) {

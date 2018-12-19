@@ -15,9 +15,9 @@
     "reverse": "adb reverse tcp:8081 tcp:8081"
   },
   "dependencies": {
+    "@ant-design/react-native": "^3.0.0-1",
     "@types/react-navigation": "^2.13.7",
     "@types/react-redux": "^6.0.10",
-    "antd-mobile-rn": "^2.3.2",
     "dva-core": "^1.4.0",
     "react": "16.6.3",
     "react-native": "0.58.0-rc.1",

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Switch } from "react-native";
-import { Checkbox } from "antd-mobile-rn"
+import { Checkbox } from "@ant-design/react-native"
 
 const AgreeItem = Checkbox.AgreeItem;
 
