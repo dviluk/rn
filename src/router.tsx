@@ -33,6 +33,7 @@ import {
 } from './modals'
 
 import { Middleware, Reducer } from 'redux';
+import { ActivityIndicator } from '@ant-design/react-native';
 
 /**
  * Navigator principal, contiene todas las secciones principales de la app
@@ -160,7 +161,7 @@ class Router extends React.PureComponent<Props> {
 
     // mostrar 'loading' cuando la app este cargando el estado inicial
     if (app.loading) {
-      return <Text>loading</Text>
+      return <ActivityIndicator toast={app.loading} />
     }
 
     return (<App dispatch={dispatch} state={router} />)

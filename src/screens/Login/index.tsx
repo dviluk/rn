@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { StyleSheet, Text, View, ViewStyle, TextStyle, ImageStyle, } from 'react-native';
-import { Button, InputItem, Flex, WingBlank, Card } from '@ant-design/react-native'
+import { Button, InputItem, Flex, WingBlank, Card, ActivityIndicator, WhiteSpace } from '@ant-design/react-native'
 import { NavigationDescriptor } from 'react-navigation';
 import t, { FormRef, FormType } from 'tcomb-form-native'
 import { connect } from 'react-redux';
@@ -60,44 +60,6 @@ class LoginScreen extends React.Component<Props, State> {
    */
   private _form: FormRef<FormType>
 
-  /**
-   * Opciones de los campos del formulario
-   */
-  private options = {
-    // auto: 'placeholders',
-    fields: {
-      username: {
-        template: textbox,
-        error: this.state.errors.username,
-        config: {
-          //
-        },
-        placeholder: 'username',
-        returnKeyType: 'next',
-        onSubmitEditing: () => {
-          if (!this._form.current) return
-
-          const nextInput = this._form.current.getComponent('password').refs.input
-          nextInput.focus()
-        }
-      },
-      password: {
-        template: textbox,
-        error: this.state.errors.username,
-        config: {
-          type: 'password'
-        },
-        secureTextEntry: true,
-        onSubmitEditing: () => {
-          this.handleLogin()
-        }
-      },
-      remember: {
-        template: checkbox
-      }
-    }
-  }
-
   constructor(props: Props) {
     super(props)
     this.handleLogin = this.handleLogin.bind(this)
@@ -117,25 +79,19 @@ class LoginScreen extends React.Component<Props, State> {
     const options = this.generateOptions()
     return (
       <View style={styles.container}>
-        <Flex direction={'column'} justify={'center'} style={{ backgroundColor: 'gray', flex: 1 }}>
+        {fetching && <ActivityIndicator toast={true} />}
+        <Flex direction={'column'} justify={'center'} style={{ flex: 1 }}>
           <View style={{ width: '80%', maxWidth: 300 }}>
-            <Card>
-              <FormLogin
-                ref={this._form}
-                type={FormLoginModel}
-                options={options}
-                value={this.state.user}
-                onChange={this.handleFormChange}
-              />
-            </Card>
-            <Flex>
-              <Flex.Item>
-                <Button disabled={fetching} onClick={this.handleLogin} type={'primary'} activeStyle={false}>{'Login'}</Button>
-              </Flex.Item>
-              <Flex.Item>
-                <Button onClick={this.goToHomeScreen} >{'Screen'}</Button>
-              </Flex.Item>
-            </Flex>
+            <FormLogin
+              ref={this._form}
+              type={FormLoginModel}
+              options={options}
+              value={this.state.user}
+              onChange={this.handleFormChange}
+            />
+            <Button onClick={this.handleLogin} type={'primary'} activeStyle={false} style={{ elevation: 3 }}>{'Login'}</Button>
+            <WhiteSpace />
+            <Button onClick={this.handleLogin} type={'primary'} activeStyle={false} style={{ elevation: 3 }}>{'Register'}</Button>
           </View>
         </Flex>
       </View>
@@ -171,8 +127,22 @@ class LoginScreen extends React.Component<Props, State> {
     }
   }
 
+  /**
+   * Genera opciones de los campos del formulario
+   */
   private generateOptions() {
     const { fetching } = this.props.app
+    const wrapperStyle: ViewStyle = {
+      backgroundColor: 'white',
+      shadowColor: 'black',
+      shadowOffset: {
+        height: 1,
+        width: 1,
+      },
+      shadowOpacity: 1,
+      shadowRadius: 5,
+      elevation: 3
+    }
     return {
       // auto: 'placeholders',
       fields: {
@@ -181,8 +151,9 @@ class LoginScreen extends React.Component<Props, State> {
           editable: fetching === false,
           config: {
             //
+            wrapperStyle
           },
-          placeholder: 'username',
+          placeholder: 'user',
           returnKeyType: 'next',
           onSubmitEditing: () => {
             if (!this._form.current) return
@@ -195,9 +166,11 @@ class LoginScreen extends React.Component<Props, State> {
           template: textbox,
           editable: fetching === false,
           config: {
-            type: 'password'
+            type: 'password',
+            wrapperStyle
           },
           secureTextEntry: true,
+          placeholder: 'pass',
           onSubmitEditing: () => {
             this.handleLogin()
           }
@@ -224,7 +197,7 @@ interface Style {
 const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
-    backgroundColor: '#ddd',
+    backgroundColor: '#F9F0FF',
   },
   welcome: {
     fontSize: 20,

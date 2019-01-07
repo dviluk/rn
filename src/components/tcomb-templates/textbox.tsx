@@ -44,8 +44,8 @@ export const textbox = (locals: any) => {
   const config = locals.config
   const handleTextChange = (value: string) => locals.onChange(value)
   return (
-    <View style={formGroupStyle}>
-      <View style={textboxViewStyle}>
+    <View style={[formGroupStyle]}>
+      <View style={[textboxViewStyle, config.wrapperStyle]}>
         <InputItem
           ref={"input"}
           accessibilityLabel={locals.label}
